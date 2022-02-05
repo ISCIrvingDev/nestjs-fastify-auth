@@ -27,5 +27,8 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
+# Environment
+.env
+
 # Personal notes
 ref/

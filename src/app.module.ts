@@ -1,10 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { ConfigModule } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
+import { MongooseModule } from '@nestjs/mongoose';
+// import { AppController } from './app.controller';
+import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.URL_MONGODB),
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+      playground: true,
+      debug: false,
+    }),
+  ],
+  // controllers: [],
+  providers: [AppService, AppResolver],
 })
 export class AppModule {}
